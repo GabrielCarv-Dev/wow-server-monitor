@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env
+.env.*
+*.sqlite3
+
+# VSCode
+.vscode/
+
+# Docker
+pgdata/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nginx
+nginx/*.conf
+
+# Pip
+*.egg-

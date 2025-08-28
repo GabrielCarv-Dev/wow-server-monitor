@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 from ..models import Target
 from ..db import get_session
 
@@ -12,7 +13,7 @@ class TargetCreate(BaseModel):
     name: str
     slug: str
     region: str
-    population: int = None
+    population: Optional[int] = None
     enabled: bool = True
 
 class TargetRead(BaseModel):
@@ -20,12 +21,13 @@ class TargetRead(BaseModel):
     name: str
     slug: str
     region: str
-    population: int = None
+    population: Optional[int] = None
     enabled: bool
-    created_at: str
+    created_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }
 
 @router.post("/targets", response_model=TargetRead, status_code=status.HTTP_201_CREATED)
 def create_target(target: TargetCreate, session: Session = Depends(get_session)):

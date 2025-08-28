@@ -4,12 +4,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
-
+RUN apt-get update && apt-get install -y curl
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./api ./api
-COPY .env .env
+COPY .env.example .env
 
 EXPOSE 8000
 
